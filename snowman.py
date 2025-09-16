@@ -39,6 +39,40 @@ def get_random_word():
     return WORDS[random.randint(0, len(WORDS) - 1)]
 
 
+def user_input(guessed_letters: str) -> str:
+    """
+    Gets one letter from the user and checks that it wasn't guessed before.
+    :param guessed_letters: str
+    :return: str
+    """
+    while True:
+        guess = input("Guess a letter: ").strip().lower()
+
+        if not guess.isalpha() or not len(guess) == 1:
+            print(f"{guess} is not a valid input! "
+                  f"A valid input must be 1 letter only!")
+
+        if guess in guessed_letters:
+            print(f"{guess} was already tried! Try a different letter!")
+            continue
+
+        return guess
+
+
+def right_guess(guess: str, guessed_letters: str) -> bool:
+    """
+    Checks if the user guessed right.
+    :param guess: str
+    :param guessed_letters: str
+    :return: bool
+    """
+    return guess in guessed_letters
+
+
+def display_game_state(mistakes: int, secret_word: str, guessed_letters: str):
+    print(STAGES[mistakes])
+
+
 def play_game():
     secret_word = get_random_word()
     print("Welcome to Snowman Meltdown!")
@@ -47,13 +81,21 @@ def play_game():
     # TODO: Build your game loop here.
     mistakes = 0
     max_mistakes = 4
-    while mistakes < max_mistakes:
-        #current snowman
-        print(STAGES[mistakes])
+    guessed_letters = ""
 
-        # For now, simply prompt the user once:
-        guess = input("Guess a letter: ").lower()
-        print("You guessed:", guess)
+    #starting snowman
+    print(STAGES[mistakes])
+
+    while mistakes < max_mistakes:
+        #valid guess
+        guess = user_input(guessed_letters)
+        guessed_letters = guessed_letters + guess
+
+        #display current snowman and guess
+        if not right_guess(guess, guessed_letters):
+            mistakes += 1
+
+        display_game_state(mistakes, secret_word, guessed_letters)
 
 
 if __name__ == "__main__":
