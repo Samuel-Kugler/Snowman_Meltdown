@@ -3,6 +3,36 @@ import random
 # List of secret words
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
+# Snowman ASCII Art stages
+STAGES = [
+     # Stage 0: Full snowman
+     """
+      ___  
+     /___\\ 
+     (o o) 
+     ( : ) 
+     ( : ) 
+     """,
+     # Stage 1: Bottom part starts melting
+     """
+      ___  
+     /___\\ 
+     (o o) 
+     ( : ) 
+     """,
+     # Stage 2: Only the head remains
+     """
+      ___  
+     /___\\ 
+     (o o) 
+     """,
+     # Stage 3: Snowman completely melted
+     """
+      ___  
+     /___\\ 
+     """
+ ]
+
 
 def get_random_word():
     """Selects a random word from the list."""
@@ -15,9 +45,15 @@ def play_game():
     print("Secret word selected: " + secret_word)  # for testing, later remove this line
 
     # TODO: Build your game loop here.
-    # For now, simply prompt the user once:
-    guess = input("Guess a letter: ").lower()
-    print("You guessed:", guess)
+    mistakes = 0
+    max_mistakes = 4
+    while mistakes < max_mistakes:
+        #current snowman
+        print(STAGES[mistakes])
+
+        # For now, simply prompt the user once:
+        guess = input("Guess a letter: ").lower()
+        print("You guessed:", guess)
 
 
 if __name__ == "__main__":
