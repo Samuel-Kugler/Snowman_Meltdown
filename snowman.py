@@ -1,37 +1,8 @@
 import random
+import ascii_art as art
 
 # List of secret words
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
-
-# Snowman ASCII Art stages
-STAGES = [
-     # Stage 0: Full snowman
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
-     ( : ) 
-     """,
-     # Stage 1: Bottom part starts melting
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
-     """,
-     # Stage 2: Only the head remains
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     """,
-     # Stage 3: Snowman completely melted
-     """
-      ___  
-     /___\\ 
-     """
- ]
 
 
 def get_random_word():
@@ -97,7 +68,7 @@ def display_game_state(mistakes: int, secret_word: str, guessed_letters: str):
     current_word = get_game_guess_state(secret_word, guessed_letters)
 
     #printing snowman
-    print(STAGES[mistakes])
+    print(art.STAGES[mistakes])
 
     #printing guessing progress
     print(" " * 5 + current_word + "\n")
@@ -110,13 +81,14 @@ def play_game():
 
     # TODO: Build your game loop here.
     mistakes = 0
-    max_mistakes = len(STAGES) - 1
+    max_mistakes = len(art.STAGES) - 1
     guessed_letters = ""
 
     #starting snowman
-    print(STAGES[mistakes])
+    print(art.STAGES[mistakes])
 
-    while mistakes < max_mistakes:
+    #PlayStage
+    while mistakes < max_mistakes and "_" in get_game_guess_state(secret_word, guessed_letters):
         #valid guess
         guess = user_input(guessed_letters)
         guessed_letters = guessed_letters + guess
