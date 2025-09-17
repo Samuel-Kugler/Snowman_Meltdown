@@ -1,8 +1,4 @@
 import game_logic as game
-from Snowman_Meltdown.game_logic import user_input
-
-# List of secret words
-WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
 
 def main():

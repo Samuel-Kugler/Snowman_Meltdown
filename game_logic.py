@@ -1,11 +1,13 @@
 import random
 import ascii_art as art
-import snowman
 
 
 def get_random_word():
     """Selects a random word from the list."""
-    return snowman.WORDS[random.randint(0, len(snowman.WORDS) - 1)]
+    # List of secret words
+    WORDS = ["python", "git", "github", "snowman", "meltdown"]
+
+    return WORDS[random.randint(0, len(WORDS) - 1)]
 
 
 def user_input(guessed_letters: str) -> str:
